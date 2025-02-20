@@ -1,38 +1,98 @@
-.App {
+/* App.css - Updated with new color palette */
+:root {
+  --light-pink: #FFF2F2;
+  --light-blue: #A9B5DF;
+  --medium-blue: #7886C7;
+  --dark-blue: #2D336B;
+  --text-dark: #222222;
+  --text-medium: #2D336B;
+  --error-color: #d93025;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  background-color: var(--light-pink);
+  color: var(--text-dark);
+}
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--light-pink), var(--light-blue), var(--medium-blue));
+  padding: 20px;
+}
+
+.auth-card {
+  background-color: white;
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(45, 51, 107, 0.15);
+  width: 100%;
+  max-width: 480px;
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(120, 134, 199, 0.2);
+  box-sizing: border-box;
+}
+
+.glow-line {
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--medium-blue), var(--dark-blue), var(--medium-blue));
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.auth-header {
+  margin-bottom: 30px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.gradient-text {
+  background: linear-gradient(90deg, var(--medium-blue), var(--dark-blue));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 28px;
+  margin-bottom: 8px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.subtitle {
+  color: var(--text-medium);
+  font-size: 16px;
+  font-weight: 500;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.toggle-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  background-color: var(--light-pink);
+  border-radius: 8px;
+  margin-bottom: 25px;
+  padding: 3px;
+  border: 1px solid var(--light-blue);
+}
+
+.toggle-btn {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 10px 0;
+  color: var(--text-medium);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.3s;
+}
+
+.toggle-btn.active {
+  background: linear-gradient(90deg, var(--medium-blue), var(--dark-blue));
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  box-shadow: 0 3px 10px rgba(45, 51, 107, 0.2);
 }
