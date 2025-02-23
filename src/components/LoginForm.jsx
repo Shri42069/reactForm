@@ -1,12 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Forms.css';
 
-function LoginForm() {
+function LoginForm({ prefillEmail, onLoginSuccess }) {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
   const [errors, setErrors] = useState({});
+  const [isJustVerified, setIsJustVerified] = useState(false);
+  
+  // Update email when prefillEmail changes
+  useEffect(() => {
+    if (prefillEmail) {
+      setFormData(prev => ({
+        ...prev,
+        email: prefillEmail
+      }));
+      setIsJustVerified(true);
+      
+      // Focus the password input when redirected from verification
+      const passwordInput = document.getElementById('password');
+      if (passwordInput) {
+        passwordInput.focus();
+      }
+    }
+  }, [prefillEmail]);
   
   const handleChange = (e) => {
     setFormData({
@@ -40,11 +58,26 @@ function LoginForm() {
     if (validateForm()) {
       console.log('Login form submitted:', formData);
       alert('Login form is valid! Check console for data.');
+      onLoginSuccess(); // Clear the verified email from parent state
+      setIsJustVerified(false);
     }
   };
   
   return (
     <form onSubmit={handleSubmit} className="auth-form">
+      {isJustVerified && (
+        <div style={{
+          backgroundColor: '#f0fdf4',
+          color: '#166534',
+          padding: '12px',
+          borderRadius: '6px',
+          marginBottom: '20px',
+          fontSize: '14px'
+        }}>
+          Email verified successfully! Please enter your password to continue.
+        </div>
+      )}
+
       <div className="form-group">
         <label htmlFor="email">Email</label>
         <div className="input-with-icon">
@@ -55,6 +88,7 @@ function LoginForm() {
             value={formData.email}
             onChange={handleChange}
             placeholder="you@example.com"
+            readOnly={isJustVerified} // Make email readonly when just verified
           />
           <span className="input-icon">✉️</span>
         </div>
